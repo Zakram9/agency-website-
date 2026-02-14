@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://storage.googleapis.com">
     <link rel="preload" as="image" href="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/698e86820084989de4d6e641.png">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -40,6 +40,103 @@
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1300;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-left: none;
+            border-right: none;
+            border-radius: 0;
+            background: rgba(10, 14, 21, 0.88);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+            transition: transform 0.26s ease, opacity 0.26s ease;
+        }
+        .top-nav.nav-hidden {
+            transform: translateY(-120%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .site-logo {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            color: #ffffff;
+            text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+        }
+        .site-logo .logo-accent { color: #ef4444; }
+        .menu-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(11, 15, 24, 0.88);
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+        }
+        .menu-toggle:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: rgba(11, 15, 24, 0.98);
+            transform: translateY(-1px);
+        }
+        .menu-toggle span {
+            width: 18px;
+            height: 2px;
+            border-radius: 99px;
+            background: #fff;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .site-menu {
+            position: fixed;
+            top: 66px;
+            left: 14px;
+            z-index: 1290;
+            width: min(340px, calc(100vw - 28px));
+            padding: 10px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(10, 14, 21, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.42);
+            display: none;
+        }
+        .site-menu.open { display: block; animation: menu-fade-in 0.2s ease; }
+        .site-menu a {
+            display: block;
+            text-decoration: none;
+            color: #e5e7eb;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .site-menu a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+        }
 
         /* Floating CTA Bar */
         .floating-cta { position: fixed; bottom: 0; left: 0; right: 0; transform: translateY(120%); background: rgba(12, 14, 20, 0.9); backdrop-filter: blur(10px); padding: 10px 14px; z-index: 1000; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -4px 30px rgba(0,0,0,0.35); transition: transform 0.3s ease, opacity 0.3s ease; }
@@ -267,19 +364,83 @@
         .submit-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
         .form-footer { text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-secondary); }
 
-        /* Features Bar (under VSL) */
+        /* Why Owners Say Yes */
         .stats-bar {
             position: relative;
-            padding: 24px 24px 10px;
-            margin-bottom: 42px;
-            background: transparent;
-            border: none;
+            overflow: hidden;
+            padding: 54px 24px 44px;
+            margin: 0 0 34px;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2942 50%, #0f2744 100%);
+            background-size: 200% 200%;
+            animation: owners-gradient-shift 15s ease infinite;
+        }
+        .stats-bar::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            right: -250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            animation: owners-float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .stats-bar::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: -200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            animation: owners-float 10s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+        .stats-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 2rem;
+        }
+        .stats-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .stats-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, transparent, #10b981, transparent);
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.6);
+        }
+        .title-main {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
         }
         .stats-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            max-width: 520px;
+            gap: 1.5rem;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .stat {
@@ -287,21 +448,15 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 18px;
-            padding: 24px 28px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(135deg, rgba(18, 18, 24, 0.6) 0%, rgba(12, 12, 16, 0.8) 100%);
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: stats-fade-in-up 0.6s ease-out forwards;
+            gap: 1.25rem;
+            padding: 2rem 1.75rem;
+            border-radius: 1.25rem;
+            border: 1.5px solid rgba(16, 185, 129, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .stat:nth-child(1) { animation-delay: 0.1s; }
-        .stat:nth-child(2) { animation-delay: 0.2s; }
-        .stat:nth-child(3) { animation-delay: 0.3s; }
-        .stat:nth-child(4) { animation-delay: 0.4s; }
         .stat::before {
             content: "";
             position: absolute;
@@ -309,57 +464,66 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
             transition: left 0.6s ease;
         }
         .stat:hover::before { left: 100%; }
         .stat:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.15);
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.5);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%);
+            box-shadow: 0 12px 48px rgba(16, 185, 129, 0.25);
         }
         .icon-wrapper {
-            position: relative;
             flex-shrink: 0;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%);
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            border: 2px solid rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .icon-wrapper::before {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: 12px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .stat:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+            border-color: rgba(16, 185, 129, 0.7);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0.25) 100%);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
         }
-        .stat:hover .icon-wrapper::before { opacity: 1; }
         .checkmark {
-            width: 22px;
-            height: 22px;
-            stroke: #22c55e;
-            stroke-width: 2.5;
+            width: 26px;
+            height: 26px;
+            stroke: #10b981;
+            stroke-width: 3;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
+            filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));
         }
-        .feature-text {
-            font-size: 17px;
-            font-weight: 500;
-            color: #ffffff;
-            letter-spacing: -0.2px;
-            line-height: 1.4;
+        .feature-content { flex: 1; text-align: center; }
+        .feature-title {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.3px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
+        .stat:hover .feature-title {
+            color: #10b981;
+            text-shadow: 0 2px 12px rgba(16, 185, 129, 0.4);
+        }
+        .feature-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .stat:hover .feature-desc { color: #e2e8f0; }
 
         section {
             padding: 100px 24px;
@@ -412,17 +576,47 @@
         .preview-dialog { width: min(1100px, 96vw); height: min(720px, 86vh); background: #0b0d11; border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,0.55); position: relative; overflow: hidden; }
         .preview-dialog iframe { width: 100%; height: 100%; border: none; }
         .preview-close { position: absolute; top: 6px; right: 8px; background: #e64949; color: #fff; border: 1px solid rgba(0,0,0,0.25); border-radius: 8px; padding: 6px 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 6px 18px rgba(230,73,73,0.35); }
+        .lead-form-dialog { width: min(680px, 96vw); height: auto; max-height: 88vh; overflow: auto; padding: 30px 24px 22px; }
+        .lead-form-title { font-size: 30px; font-weight: 800; line-height: 1.15; margin: 0 0 18px; letter-spacing: -0.02em; text-align: center; }
+        .lead-form { display: grid; gap: 14px; }
+        .lead-form-group { display: grid; gap: 8px; }
+        .lead-form-group label { font-size: 14px; font-weight: 600; color: #e5e7eb; }
+        .lead-form-group input, .lead-form-group textarea {
+            width: 100%;
+            background: #0f131b;
+            border: 1px solid #2b3240;
+            border-radius: 10px;
+            color: #fff;
+            padding: 12px 14px;
+            font: inherit;
+        }
+        .lead-form-group textarea { min-height: 110px; resize: vertical; }
+        .lead-form-group input:focus, .lead-form-group textarea:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.15); }
+        .lead-form-submit {
+            margin-top: 6px;
+            background: var(--primary);
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .lead-form-submit:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .lead-form-note { text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
 
         /* Testimonials */
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
         .testimonial { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; }
         .quote-icon { position: absolute; top: 24px; right: 24px; font-size: 48px; color: var(--primary); opacity: 0.2; }
         .testimonial-text { font-size: 16px; line-height: 1.8; margin-bottom: 24px; position: relative; }
-        .testimonial-author { display: flex; align-items: center; gap: 16px; }
-        .author-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%); }
+        .testimonial-author { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .author-avatar { display: none; }
         .author-info h4 { font-weight: 700; margin-bottom: 4px; }
         .author-info p { font-size: 14px; color: var(--text-secondary); }
-        .rating { color: var(--warning); margin-bottom: 16px; font-size: 18px; }
+        .rating { color: var(--warning); margin-bottom: 16px; font-size: 23.4px; }
         .hidden { display: none; }
 
         /* Guarantee Section */
@@ -478,8 +672,10 @@
             .section-header { margin: 0 auto 52px; }
             .section-title { font-size: clamp(30px, 6vw, 44px); }
             .section-description { font-size: 18px; }
-            .stats-grid { max-width: 560px; gap: 14px; }
-            .stats-bar { margin-bottom: 34px; }
+            .stats-bar { padding: 46px 20px 36px; margin-bottom: 30px; }
+            .stats-container { max-width: 560px; }
+            .stats-title { font-size: 2.2rem; margin-bottom: 2.4rem; }
+            .stat { padding: 1.75rem 1.4rem; }
             .step { grid-template-columns: 56px 1fr; gap: 16px; margin-bottom: 44px; }
             .step:not(:last-child)::after { left: 27px; top: 60px; bottom: -44px; }
             .step-number-circle { width: 56px; height: 56px; font-size: 22px; }
@@ -496,6 +692,10 @@
         @media (max-width: 640px) {
             body { padding-bottom: 96px; }
             .container { padding: 0 14px; }
+            .top-nav { top: 0; left: 0; right: 0; gap: 20px; padding: 7px 10px; border-radius: 0; }
+            .site-logo { font-size: clamp(1.1rem, 5.7vw, 1.6rem); position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+            .menu-toggle { width: 38px; height: 38px; }
+            .site-menu { top: 60px; left: 10px; width: calc(100vw - 20px); }
             .hero { padding: 52px 14px 36px; }
             .hero-left h1 { font-size: clamp(32px, 9.4vw, 42px); line-height: 1.12; }
             .hero-subheadline { font-size: 17px; margin-bottom: 18px; }
@@ -516,12 +716,16 @@
             .section-header { margin-bottom: 32px; }
             h2.section-title { font-size: 26px; line-height: 1.2; }
             .section-description { font-size: 16px; }
-            .stats-grid { max-width: 100%; gap: 12px; }
-            .stats-bar { margin-bottom: 26px; }
-            .stat { padding: 20px 24px; gap: 16px; }
-            .icon-wrapper { width: 40px; height: 40px; }
-            .checkmark { width: 20px; height: 20px; }
-            .feature-text { font-size: 16px; }
+            .stats-bar { padding: 34px 14px 28px; margin-bottom: 24px; }
+            .stats-container { max-width: 100%; padding-bottom: 2rem; }
+            .stats-title { font-size: 1.75rem; margin-bottom: 2rem; padding-bottom: 1rem; }
+            .stats-title::after { width: 60px; height: 3px; }
+            .stats-grid { max-width: 100%; gap: 1rem; }
+            .stat { padding: 1.5rem 1rem; gap: 1rem; }
+            .icon-wrapper { width: 44px; height: 44px; }
+            .checkmark { width: 22px; height: 22px; }
+            .feature-title { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .feature-desc { font-size: 0.875rem; line-height: 1.5; }
             .cta-group { flex-direction: column; width: 100%; }
             .btn-primary, .btn-secondary { width: 100%; justify-content: center; padding: 14px 16px; font-size: 15px; }
             .step { grid-template-columns: 44px 1fr; gap: 12px; margin-bottom: 32px; }
@@ -541,6 +745,8 @@
             .floating-cta.visible { transform: translateY(0); }
             .floating-cta-btn-primary { width: auto; min-width: 0; justify-content: center; text-align: center; font-size: 13px; padding: 11px 14px; }
             footer { padding: 40px 14px 28px; }
+            .lead-form-dialog { padding: 24px 16px 18px; }
+            .lead-form-title { font-size: 24px; margin-bottom: 14px; }
 
             .cta-block-section {
                 padding: 20px 14px;
@@ -580,8 +786,12 @@
             .vsl-label { font-size: 12px; padding: 9px 18px; }
             .vsl-cta-text { font-size: 13px; }
             .vsl-urgency { font-size: 11px; padding: 4px 12px; }
-            .stat { padding: 18px 20px; }
-            .feature-text { font-size: 15px; }
+            .stats-title { font-size: 1.5rem; }
+            .stat { padding: 1.25rem 0.875rem; }
+            .icon-wrapper { width: 40px; height: 40px; }
+            .checkmark { width: 20px; height: 20px; }
+            .feature-title { font-size: 0.95rem; }
+            .feature-desc { font-size: 0.8rem; }
             .cta-block-card { padding: 34px 24px 32px; }
             .cta-block-title { font-size: 30px; margin-bottom: 30px; }
             .cta-block-button { padding: 20px 28px; font-size: 15px; }
@@ -594,6 +804,22 @@
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+
+        @keyframes owners-gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes owners-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes menu-fade-in {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes cta-bg-flow {
@@ -675,6 +901,23 @@
     </style>
 </head>
 <body>
+    <div class="top-nav">
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="#top" class="site-logo" aria-label="UK Free Website Home"><span class="logo-accent">UK</span>FreeWebsite</a>
+    </div>
+    <nav class="site-menu" id="siteMenu" aria-label="Section navigation">
+        <a href="#top">Home</a>
+        <a href="#vsl">Watch VSL</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#why-owners">Why Owners Say Yes</a>
+        <a href="#examples">Websites We've Built</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+    </nav>
     <div class="floating-cta" id="floatingCta">
         <div class="floating-cta-content">
             <a href="https://wa.me/message/743Z7RV5ZOQKN1" target="_blank" rel="noopener noreferrer" class="floating-cta-btn-primary">Start My Free Website Now</a>
@@ -692,8 +935,8 @@
                     <div class="trust-badge"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Built to get you more calls, leads, and booked jobs.</div>
                 </div>
                 <div class="cta-group">
-                    <a href="https://wa.me/message/743Z7RV5ZOQKN1" target="_blank" rel="noopener noreferrer" class="btn-primary">Get My Free Website</a>
-                    <a href="#vsl" class="btn-secondary">Message Us on WhatsApp</a>
+                    <a href="https://wa.me/message/743Z7RV5ZOQKN1" target="_blank" rel="noopener noreferrer" class="btn-primary">Message Us on WhatsApp</a>
+                    <a href="https://wa.me/message/743Z7RV5ZOQKN1" target="_blank" rel="noopener noreferrer" class="btn-secondary">Get My Free Website</a>
                 </div>
             </div>
             <div class="hero-right">
@@ -705,13 +948,13 @@
                     <div class="vsl-wrapper">
                         <div class="vsl-container" id="videoContainer">
                             <video id="mainVideo" preload="metadata" playsinline poster="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/698e86820084989de4d6e641.png">
-                                <source src="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/698e7b0a899b886c19eb28f3.mp4" type="video/mp4">
+                                <source src="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/6990aa4ac0866540a6d6df1f.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                            <div class="vsl-label" id="videoLabel">MUST-WATCH • 55sec</div>
+                            <div class="vsl-label" id="videoLabel">MUST-WATCH • 45sec</div>
                         </div>
                         <div class="vsl-cta">
-                            <p class="vsl-cta-text"><strong>55sec to see how you get a FREE professional website that gets you calls.</strong> Pay Only If You Love It.</p>
+                            <p class="vsl-cta-text"><strong>45sec to see how you get a FREE professional website that gets you calls.</strong><br><span style="display:block; text-align:center;">Pay Only If You Love It.</span></p>
                             <span class="vsl-urgency">🔥 Limited spots available</span>
                         </div>
                     </div>
@@ -720,36 +963,7 @@
         </div>
     </section>
 
-    <div class="stats-bar">
-        <div class="stats-grid">
-            <div class="stat">
-                <div class="icon-wrapper">
-                    <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="feature-text">No upfront payment</div>
-            </div>
-            <div class="stat">
-                <div class="icon-wrapper">
-                    <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="feature-text">Ready in 48-72 hours</div>
-            </div>
-            <div class="stat">
-                <div class="icon-wrapper">
-                    <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="feature-text">Conversion-focused</div>
-            </div>
-            <div class="stat">
-                <div class="icon-wrapper">
-                    <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="feature-text">Professional design</div>
-            </div>
-        </div>
-    </div>
-
-    <section style="padding: 80px 24px 0px;">
+    <section id="how-it-works" style="padding: 80px 24px 0px;">
         <div class="container">
             <div class="section-header"><span class="section-tag">The Process</span><h2 class="section-title">How It Works</h2><p class="section-description">Three simple steps. Fast delivery. Zero risk.</p></div>
             <div class="steps-container">
@@ -779,13 +993,37 @@
         </div>
     </section>
 
-    <section style="background: var(--bg-card);">
-        <div class="container">
-            <div class="section-header"><span class="section-tag">Risk Reversal</span><h2 class="section-title">Why Owners Say Yes</h2><p class="section-description">Nothing to lose. Only pay if you like it.</p></div>
-            <div class="benefits-grid">
-                <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><h3>Zero Money Down</h3><p>We build your entire website first. You see the finished product before deciding. Most web designers want 50% upfront. We want zero.</p></div>
-                <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div><h3>Fast Turnaround</h3><p>48–72 hours from form submission to a finished website. While other companies take weeks or months, you'll have yours this week.</p></div>
-                <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Conversion Focused</h3><p>This isn't amateur hour. Your site looks like a $5k+ website and is built to drive real calls, leads, and booked jobs.</p></div>
+    <section class="stats-bar" id="why-owners">
+        <div class="stats-container">
+            <h2 class="stats-title"><span class="title-main">Why Owners Say Yes</span></h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="icon-wrapper">
+                        <svg class="checkmark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-title">No upfront payment</p>
+                        <p class="feature-desc">Most web designers want 50% upfront, We want zero. You pay if you LOVE it.</p>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="icon-wrapper">
+                        <svg class="checkmark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-title">Ready in 48-72 hours</p>
+                        <p class="feature-desc">While other companies take weeks or months, you'll have yours in 48-72h.</p>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="icon-wrapper">
+                        <svg class="checkmark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-title">Conversion Focused</p>
+                        <p class="feature-desc">Your site looks like a $5k+ website and is built to drive real calls and booked jobs.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -825,16 +1063,22 @@
         </div>
     </section>
 
-    <section style="background: var(--bg-card);">
+    <section style="background: var(--bg-card);" id="reviews">
         <div class="container">
             <div class="section-header"><span class="section-tag">Social Proof</span><h2 class="section-title">What Our Clients Say</h2><p class="section-description">Business owners choose us because we make it easy — and risk-free.</p></div>
             <div class="testimonials-grid">
-                <div class="testimonial"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Marcus Rodriguez</h4><p>HVAC Company Owner</p></div></div></div>
-                <div class="testimonial"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Sarah Chen</h4><p>Physical Therapist</p></div></div></div>
-                <div class="testimonial"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>James Patterson</h4><p>Roofing Contractor</p></div></div></div>
-                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>David Thompson</h4><p>Attorney at Law</p></div></div></div>
-                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Amanda Martinez</h4><p>Interior Designer</p></div></div></div>
-                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="rating">★★★★★</div><p class="testimonial-text">"They built my website in two days. I only paid once I saw the result. Super easy and professional."</p><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Tom Wilson</h4><p>Landscaping Services</p></div></div></div>
+                <div class="testimonial"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>James W.</h4><p>London</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I honestly thought this was too good to be true at first. A free website with no upfront payment sounded risky, but they delivered exactly what they promised. I only started paying once I was happy with the site."</p></div>
+                <div class="testimonial"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Adekunle Ogun</h4><p>Peckham</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"They explained everything clearly and didn't oversell anything. What you see is what you get. The website was delivered on time and matched my business perfectly."</p></div>
+                <div class="testimonial"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Ayaan Rahman</h4><p>Luton</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I appreciated the honest approach. No hidden fees, no pressure to pay. The website looks professional and represents my business exactly how I wanted."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Sarah Collins</h4><p>Manchester</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"The whole process was incredibly easy. I gave them a few details about my business and within two days my website was ready. No pressure, no payment asked upfront. Very professional."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Imran Hossain</h4><p>Tower Hamlets</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"They only asked for basic information and took care of the rest. The website was ready quickly, and I didn't have to worry about payments or technical stuff."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Daniel Moore</h4><p>Birmingham</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I liked the fact that I wasn't locked into anything. They built the website first, let me review it, and only then explained the £19.99 monthly plan. That gave me a lot of confidence."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Emma Richardson</h4><p>Leeds</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"The £19.99 per month is great value considering it includes hosting, security, backups, and support. I don't have to worry about anything technical anymore."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Nusrat Ahmed</h4><p>East London</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I was worried about being asked for my card details upfront, but they never asked. Everything was transparent, and the final website exceeded my expectations."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Oliver Thompson</h4><p>Bristol</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"My biggest concern was support after the website went live. They've been very responsive and helpful whenever I had a question. It feels like they actually care."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Michael Turner</h4><p>Nottingham</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I've worked with web designers before and paid a lot upfront with disappointing results. This was completely different. Seeing the website before paying made the decision easy."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Rachel Evans</h4><p>Sheffield</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"The website looks clean, professional, and works perfectly on mobile. It was ready much faster than I expected, and the process was straightforward from start to finish."</p></div>
+                <div class="testimonial hidden"><div class="quote-icon">"</div><div class="testimonial-author"><div class="author-avatar"></div><div class="author-info"><h4>Andrew Foster</h4><p>Reading</p></div></div><div class="rating">★★★★★</div><p class="testimonial-text">"I liked that there was no long-term contract. Knowing I could cancel anytime made me comfortable moving forward. So far, I'm very happy with the service."</p></div>
             </div>
             <div style="text-align:center; margin-top:28px;">
                 <button id="moreReviews" class="btn-secondary" style="padding:14px 28px;">Show more</button>
@@ -842,16 +1086,16 @@
         </div>
     </section>
 
-    <section>
+    <section id="faq">
         <div class="container">
             <div class="section-header"><span class="section-tag">FAQ</span><h2 class="section-title">Frequently Asked Questions</h2></div>
             <div class="faq-container">
-                <div class="faq-item"><div class="faq-question"><span>Is the website really free?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Yes. You pay nothing upfront. You only pay if you decide to keep it live.</div></div></div>
-                <div class="faq-item"><div class="faq-question"><span>What does £19.99/month include?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Hosting, daily backups, SSL, security updates, personal support, and full platform access.</div></div></div>
-                <div class="faq-item"><div class="faq-question"><span>How long does it take?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Your website is ready in 48–72 hours.</div></div></div>
-                <div class="faq-item hidden"><div class="faq-question"><span>Can I cancel later?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Yes. No long-term contracts. Cancel anytime.</div></div></div>
-                <div class="faq-item hidden"><div class="faq-question"><span>Is the website really free?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Yes. You pay nothing upfront. You only pay if you decide to keep it live.</div></div></div>
-                <div class="faq-item hidden"><div class="faq-question"><span>What does £19.99/month include?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Hosting, daily backups, SSL, security updates, personal support, and full platform access.</div></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Is this really free, or are there any hidden fees?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Yes, it's genuinely free to start. There are no hidden fees, no setup costs, and no upfront payments. We build your website first, and you only pay if you decide to keep it live. If you don't like it, you pay nothing.</div></div></div>
+                <div class="faq-item"><div class="faq-question"><span>What does the £19.99/month actually include?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">The £19.99/month covers everything you need to run your website smoothly: hosting, daily backups, SSL certification, ongoing security updates, personal support, and full access to the platform. There are no extra charges or surprise costs.</div></div></div>
+                <div class="faq-item"><div class="faq-question"><span>What if I don't like the website?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Then you don't pay. There is no obligation to continue if the website doesn't meet your expectations. You are free to walk away without any cost or pressure.</div></div></div>
+                <div class="faq-item hidden"><div class="faq-question"><span>What do you need from me to get started?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Once you contact us, we'll ask for a few basic details about your business so we can tailor the website to your needs. That's it. We don't ask for any payment or credit card information. After receiving your details, your website will be ready within 48–72 hours.</div></div></div>
+                <div class="faq-item hidden"><div class="faq-question"><span>Am I locked into a long-term contract?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">No. There are no long-term contracts or commitments. You can cancel at any time. You stay with us because the service provides value, not because you're locked in.</div></div></div>
+                <div class="faq-item hidden"><div class="faq-question"><span>Why should I trust you with my business website?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="faq-answer"><div class="faq-answer-content">Because we take all the risk off your shoulders. We only get paid if you're happy with the result. Our process is transparent, our work speaks for itself, and we focus on delivering professional websites that genuinely help businesses look credible and convert visitors into customers.</div></div></div>
             </div>
             <div style="text-align:center; margin-top:20px;">
                 <button id="moreFaq" class="btn-secondary" style="padding:12px 24px;">Show more</button>
@@ -892,6 +1136,37 @@
     </div>
   </div>
 
+  <div class="preview-modal" id="leadFormModal">
+    <div class="preview-dialog lead-form-dialog">
+      <button class="preview-close" id="leadFormClose" type="button">Close</button>
+      <h3 class="lead-form-title">Get My Free Website</h3>
+      <form id="leadForm" class="lead-form" novalidate>
+        <div class="lead-form-group">
+          <label for="leadName">Name</label>
+          <input id="leadName" name="name" type="text" required>
+        </div>
+        <div class="lead-form-group">
+          <label for="leadBusinessName">Business Name</label>
+          <input id="leadBusinessName" name="business_name" type="text" required>
+        </div>
+        <div class="lead-form-group">
+          <label for="leadWhatsapp">WhatsApp Phone Number</label>
+          <input id="leadWhatsapp" name="whatsapp_phone" type="tel" required>
+        </div>
+        <div class="lead-form-group">
+          <label for="leadEmail">Email</label>
+          <input id="leadEmail" name="email" type="email" required>
+        </div>
+        <div class="lead-form-group">
+          <label for="leadBusinessDesc">Describe shortly what you do in your business</label>
+          <textarea id="leadBusinessDesc" name="business_description" required></textarea>
+        </div>
+        <button type="submit" class="lead-form-submit">Submit</button>
+        <p class="lead-form-note">We will contact you shortly after your submission.</p>
+      </form>
+    </div>
+  </div>
+
     <script>
         // Add reveal-on-scroll to key elements
         const animatedEls = document.querySelectorAll('.section, .benefit-card, .portfolio-item, .testimonial, .hero-left, .hero-video, .floating-cta');
@@ -911,6 +1186,15 @@
         const modalFrame = document.getElementById('previewFrame');
         const modalClose = document.getElementById('previewClose');
         const portfolioCards = document.querySelectorAll('.portfolio-item');
+        const leadFormModal = document.getElementById('leadFormModal');
+        const leadFormClose = document.getElementById('leadFormClose');
+        const leadFormEl = document.getElementById('leadForm');
+        const leadFormTriggers = document.querySelectorAll('.open-lead-form');
+        const menuToggle = document.getElementById('menuToggle');
+        const siteMenu = document.getElementById('siteMenu');
+        const topNav = document.querySelector('.top-nav');
+        const mobileTopNavQuery = window.matchMedia('(max-width: 640px)');
+        let lastScrollY = window.scrollY;
 
         // VSL inline player
         const mainVideo = document.getElementById('mainVideo');
@@ -926,6 +1210,22 @@
             modalFrame.src = '';
             document.body.style.overflow = '';
         }
+        function openLeadForm() {
+            if (!leadFormModal) return;
+            leadFormModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLeadForm() {
+            if (!leadFormModal) return;
+            leadFormModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function setSiteMenu(open) {
+            if (!menuToggle || !siteMenu) return;
+            siteMenu.classList.toggle('open', open);
+            menuToggle.classList.toggle('open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+        }
 
         portfolioCards.forEach(card => {
             card.addEventListener('click', () => openPreview(card.dataset.preview));
@@ -936,6 +1236,45 @@
         modalClose.addEventListener('click', closePreview);
         modal.addEventListener('click', (e) => { if (e.target === modal) closePreview(); });
         window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closePreview(); });
+
+        leadFormTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLeadForm();
+            });
+        });
+        if (leadFormClose) leadFormClose.addEventListener('click', closeLeadForm);
+        if (leadFormModal) leadFormModal.addEventListener('click', (e) => { if (e.target === leadFormModal) closeLeadForm(); });
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && leadFormModal && leadFormModal.classList.contains('open')) closeLeadForm(); });
+        if (leadFormEl) {
+            leadFormEl.addEventListener('submit', (e) => {
+                e.preventDefault();
+            });
+        }
+
+        if (menuToggle && siteMenu) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setSiteMenu(!siteMenu.classList.contains('open'));
+            });
+            siteMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', () => setSiteMenu(false));
+            });
+            document.addEventListener('click', (e) => {
+                if (!siteMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    setSiteMenu(false);
+                }
+            });
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') setSiteMenu(false);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (!mobileTopNavQuery.matches && topNav) {
+                topNav.classList.remove('nav-hidden');
+            }
+        });
 
         if (mainVideo && videoLabel) {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1017,9 +1356,23 @@
 
         // Floating CTA Bar
         window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
             const floatingCta = document.getElementById('floatingCta');
             const heroHeight = document.querySelector('.hero').offsetHeight;
-            floatingCta.classList.toggle('visible', window.scrollY > heroHeight / 2);
+            floatingCta.classList.toggle('visible', currentScrollY > heroHeight / 2);
+
+            if (topNav) {
+                if (mobileTopNavQuery.matches) {
+                    const scrollingDown = currentScrollY > lastScrollY;
+                    const pastThreshold = currentScrollY > 60;
+                    const menuOpen = !!(siteMenu && siteMenu.classList.contains('open'));
+                    topNav.classList.toggle('nav-hidden', scrollingDown && pastThreshold && !menuOpen);
+                } else {
+                    topNav.classList.remove('nav-hidden');
+                }
+            }
+
+            lastScrollY = Math.max(currentScrollY, 0);
         });
 
         // FAQ Accordion
