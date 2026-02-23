@@ -6,6 +6,16 @@ Websites must feel premium, modern, trustworthy, conversion-focused, unique per 
 
 ---
 
+## WORKSPACE CHECK (MANDATORY)
+
+Must:
+
+- Confirm current workspace path before starting work.
+- If current workspace is not `/workspaces/agency-website-`, stop immediately.
+- If workspace is wrong, return only: "Wrong workspace. Reopen this chat in /workspaces/agency-website-."
+
+---
+
 ## PRIORITY ORDER (WHEN RULES CONFLICT)
 
 Apply rules in this order:
@@ -137,6 +147,23 @@ Never:
 - Add fake schema, fake reviews, or manipulative SEO tactics.
 
 SEO is human-first.
+
+---
+
+## CLIENT FOLDER OUTPUT RULES
+
+Must:
+
+- Use `Clients/` as the output root folder.
+- Create one sub-folder per client.
+- Name the sub-folder exactly as the provided Business name.
+- Create or update all required pages inside `Clients/<Business name>/`.
+- If the client folder already exists, update files in place unless the user asks for a different folder.
+- Return the exact created/updated file paths in the final response.
+
+Validation:
+
+- If Business name includes path separators (`/` or `\`) or path traversal tokens (`..`), stop and request a safe Business name before creating files.
 
 ---
 

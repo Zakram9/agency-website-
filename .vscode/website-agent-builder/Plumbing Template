@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaFlow Pro - Premium Plumbing Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --deep-blue: #0A2463;
+            --ocean-blue: #3E92CC;
+            --bright-orange: #FF6B35;
+            --coral: #FF8C42;
+            --light-bg: #F0F4F8;
+            --charcoal: #1A1A2E;
+            --accent-purple: #6C5CE7;
+            --accent-teal: #00D9C0;
+            --success-green: #00E676;
+            --dark-navy: #0D1B2A;
+            --section-dark: #1B263B;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light-bg);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .gradient-text-primary {
+            background: linear-gradient(135deg, var(--deep-blue), var(--ocean-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-accent {
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-white {
+            background: linear-gradient(135deg, white, var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-teal {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-success {
+            background: linear-gradient(135deg, var(--accent-teal), var(--success-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* MOBILE FIRST - Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(247, 250, 252, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(62, 146, 204, 0.15);
+            box-shadow: 0 4px 20px rgba(10, 36, 99, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .nav-cta-desktop {
+            display: none;
+        }
+
+        .nav-cta-mobile {
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            padding: 0.85rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        /* MOBILE FIRST - Hero */
+        .hero {
+            margin-top: 70px;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .hero-content {
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, #E1E8F0 0%, #D4E0ED 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(62, 146, 204, 0.15), transparent);
+            border-radius: 50%;
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(62, 146, 204, 0.1));
+            color: var(--accent-purple);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: fit-content;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title .accent {
+            display: block;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: rgba(26, 26, 46, 0.7);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 1.1rem 2rem;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ocean-blue);
+            border: 2px solid var(--ocean-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            padding: 1.5rem 0;
+            border-top: 3px solid;
+            border-image: linear-gradient(135deg, var(--ocean-blue), var(--accent-teal)) 1;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(26, 26, 46, 0.6);
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--ocean-blue) 50%, var(--accent-purple) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, 20px) scale(1.1); }
+        }
+
+        .hero-form-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hero-form {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-form h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-form p {
+            color: rgba(26, 26, 46, 0.7);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--deep-blue);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(62, 146, 204, 0.2);
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 4px rgba(62, 146, 204, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(26, 26, 46, 0.5);
+            margin-top: 1rem;
+        }
+
+        /* MOBILE FIRST - Services */
+        .services {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(to bottom, #E8EEF7, #F0F4F8);
+        }
+
+        .section-header {
+            max-width: 1600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: rgba(26, 26, 46, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(62, 146, 204, 0.15);
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--bright-orange), var(--accent-purple));
+            transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(62, 146, 204, 0.2);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            color: var(--bright-orange);
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover .service-icon svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, rgba(62, 146, 204, 0.15), rgba(255, 107, 53, 0.1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .service-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: rgba(26, 26, 46, 0.7);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .service-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .service-list li {
+            color: rgba(26, 26, 46, 0.6);
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .service-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+
+        /* MOBILE FIRST - CTA Small (with smaller text) */
+        .cta-small {
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-small::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+        }
+
+        .cta-small-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-small h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .cta-small p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-small-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .cta-small .btn {
+            width: 100%;
+            padding: 1.3rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-small .btn-primary {
+            background: white;
+            color: var(--bright-orange);
+            border: 2px solid white;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-small .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* MOBILE FIRST - Trust Banner */
+        .trust-banner {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--ocean-blue) 50%, var(--accent-purple) 100%);
+            padding: 3rem 1.5rem;
+        }
+
+        .trust-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .trust-text h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .trust-text p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-5px);
+        }
+
+        .badge-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            color: var(--accent-teal);
+        }
+
+        .badge-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .badge-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* MOBILE FIRST - Process */
+        .process {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, var(--section-dark) 0%, var(--deep-blue) 100%);
+        }
+
+        .process .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .process-steps {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            font-family: 'Sora', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s;
+        }
+
+        .step:nth-child(2) .step-number {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--accent-teal));
+        }
+
+        .step:nth-child(3) .step-number {
+            background: linear-gradient(135deg, var(--accent-purple), var(--ocean-blue));
+        }
+
+        .step:nth-child(4) .step-number {
+            background: linear-gradient(135deg, var(--accent-teal), var(--success-green));
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.4);
+        }
+
+        .step-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .step-description {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* MOBILE FIRST - Testimonials */
+        .testimonials {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(to bottom, #D4E0ED, #E8EEF7);
+        }
+
+        .testimonials-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .testimonial {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            border: 1px solid rgba(62, 146, 204, 0.1);
+            transition: all 0.3s;
+        }
+
+        .testimonial.featured {
+            background: linear-gradient(135deg, var(--deep-blue), var(--ocean-blue));
+            color: white;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(62, 146, 204, 0.15);
+        }
+
+        .testimonial-stars {
+            color: var(--bright-orange);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial.featured .testimonial-stars {
+            color: var(--accent-teal);
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial.featured .testimonial-text {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(62, 146, 204, 0.2);
+        }
+
+        .testimonial.featured .author-avatar-img {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial.featured .author-info h4 {
+            color: white;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(26, 26, 46, 0.6);
+        }
+
+        .testimonial.featured .author-info p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* MOBILE FIRST - CTA - MATCHING EMERGENCY PLUMBING FORMAT */
+        .cta {
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .cta .btn {
+            width: 100%;
+            padding: 1.3rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--bright-orange);
+            border: 2px solid white;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        .cta .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta .btn-secondary:hover {
+            background: white;
+            color: var(--bright-orange);
+        }
+
+        /* MOBILE FIRST - Contact */
+        .contact {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--section-dark) 100%);
+        }
+
+        .contact-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 12px;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s;
+        }
+
+        .info-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .info-item:hover .info-icon {
+            transform: scale(1.1);
+        }
+
+        .info-details h4 {
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-details p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MOBILE FIRST - Footer */
+        footer {
+            background: var(--charcoal);
+            padding: 3rem 1.5rem 1.5rem;
+        }
+
+        .footer-grid {
+            max-width: 1600px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* MOBILE FIRST - Floating Form */
+        .floating-form {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.5s;
+        }
+
+        .floating-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-form-trigger {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .floating-form-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.5);
+        }
+
+        .floating-form-trigger svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-form-panel {
+            position: absolute;
+            bottom: 80px;
+            right: -10px;
+            width: calc(100vw - 40px);
+            max-width: 380px;
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.4s;
+        }
+
+        .floating-form-panel.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .floating-form-panel h4 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .floating-form-panel p {
+            color: rgba(26, 26, 46, 0.6);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .floating-form-panel input,
+        .floating-form-panel select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid rgba(62, 146, 204, 0.2);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .floating-form-panel input:focus,
+        .floating-form-panel select:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(62, 146, 204, 0.1);
+        }
+
+        .floating-form-panel button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 100px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .floating-form-panel button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .close-floating-form {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: rgba(26, 26, 46, 0.4);
+            cursor: pointer;
+            width: auto;
+            padding: 0.5rem;
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 375px) {
+            .cta h2 {
+                font-size: 2rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .cta-phone-container {
+                padding: 1.25rem 2rem;
+            }
+
+            .cta-phone-text {
+                font-size: 1rem;
+            }
+
+            .cta-phone {
+                font-size: 1.6rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 2.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* TABLET - 768px */
+        @media (min-width: 768px) {
+            .nav-container {
+                padding: 1.25rem 2rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                margin-top: 75px;
+            }
+
+            .hero-content {
+                padding: 4rem 2rem;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-description {
+                font-size: 1.15rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-visual {
+                padding: 3rem 2rem;
+            }
+
+            .services {
+                padding: 5rem 2rem;
+            }
+
+            .section-header {
+                margin-bottom: 4rem;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .trust-banner {
+                padding: 4rem 2rem;
+            }
+
+            .trust-badges {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-small {
+                padding: 4rem 2rem;
+            }
+
+            .cta-small h3 {
+                font-size: 2.5rem;
+            }
+
+            .cta-small p {
+                font-size: 1rem;
+            }
+
+            .cta-small-buttons {
+                max-width: 450px;
+            }
+
+            .cta-small .btn {
+                padding: 1.4rem 3rem;
+                font-size: 1.15rem;
+            }
+
+            .process {
+                padding: 5rem 2rem;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            .testimonials {
+                padding: 5rem 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta {
+                padding: 4rem 2rem;
+            }
+
+            .cta h3 {
+                font-size: 2.5rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-buttons {
+                max-width: 450px;
+            }
+
+            .cta .btn {
+                padding: 1.4rem 3rem;
+                font-size: 1.15rem;
+            }
+
+            .contact {
+                padding: 5rem 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* DESKTOP - 1024px */
+        @media (min-width: 1024px) {
+            .nav-cta-mobile {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 3rem;
+                align-items: center;
+                list-style: none;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--charcoal);
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+
+            .nav-links a:hover {
+                color: var(--ocean-blue);
+            }
+
+            .nav-cta-desktop {
+                display: inline-block;
+                background: linear-gradient(135deg, var(--bright-orange), var(--coral));
+                color: white;
+                padding: 0.9rem 2rem;
+                border-radius: 50px;
+                font-weight: 600;
+                text-decoration: none;
+                box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+                transition: all 0.3s;
+            }
+
+            .nav-cta-desktop:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            }
+
+            .nav-container {
+                padding: 1.5rem 3rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr 1fr;
+                margin-top: 88px;
+                min-height: 100vh;
+            }
+
+            .hero-content {
+                padding: 6rem 3rem 4rem 6rem;
+            }
+
+            .hero-label {
+                font-size: 0.85rem;
+                padding: 0.5rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 5rem;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 1.25rem;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+
+            .btn {
+                width: auto;
+                padding: 1.2rem 2.5rem;
+            }
+
+            .hero-visual {
+                padding: 4rem 3rem;
+            }
+
+            .hero-form {
+                padding: 3rem;
+            }
+
+            .hero-form h3 {
+                font-size: 2rem;
+            }
+
+            .services {
+                padding: 8rem 3rem;
+            }
+
+            .section-header {
+                margin-bottom: 5rem;
+            }
+
+            .section-tag {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 3.5rem;
+            }
+
+            .section-description {
+                font-size: 1.2rem;
+            }
+
+            .services-grid {
+                gap: 2.5rem;
+            }
+
+            .service-card {
+                padding: 3rem;
+            }
+
+            .service-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 2rem;
+            }
+
+            .service-number {
+                font-size: 4rem;
+            }
+
+            .service-title {
+                font-size: 1.5rem;
+            }
+
+            .trust-content {
+                grid-template-columns: 1.5fr 1fr;
+                gap: 4rem;
+            }
+
+            .trust-text h2 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .trust-text p {
+                font-size: 1.2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .trust-badges {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .badge {
+                padding: 2rem;
+            }
+
+            .cta-small {
+                padding: 5rem 3rem;
+            }
+
+            .cta-small h3 {
+                font-size: 3.5rem;
+                letter-spacing: 2px;
+            }
+
+            .cta-small p {
+                font-size: 1.15rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-small-buttons {
+                max-width: 500px;
+            }
+
+            .cta-small .btn {
+                padding: 1.5rem 3.5rem;
+                font-size: 1.2rem;
+            }
+
+            .process {
+                padding: 8rem 3rem;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+            }
+
+            .process-steps::before {
+                content: '';
+                position: absolute;
+                top: 3rem;
+                left: 10%;
+                right: 10%;
+                height: 3px;
+                background: linear-gradient(to right, var(--bright-orange), var(--ocean-blue), var(--accent-purple), var(--accent-teal));
+                z-index: 0;
+            }
+
+            .step-number {
+                width: 6rem;
+                height: 6rem;
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .step-title {
+                font-size: 1.3rem;
+            }
+
+            .testimonials {
+                padding: 8rem 3rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+
+            .testimonial {
+                padding: 3rem;
+            }
+
+            .testimonial-text {
+                font-size: 1.1rem;
+            }
+
+            .cta {
+                padding: 5rem 3rem;
+            }
+
+            .cta h3 {
+                font-size: 3.5rem;
+                letter-spacing: 2px;
+            }
+
+            .cta p {
+                font-size: 1.15rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-buttons {
+                max-width: 500px;
+            }
+
+            .cta .btn {
+                padding: 1.5rem 3.5rem;
+                font-size: 1.2rem;
+            }
+
+            .contact {
+                padding: 8rem 3rem;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr 1fr;
+                gap: 6rem;
+            }
+
+            .contact-info h3 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .info-items {
+                gap: 2rem;
+            }
+
+            .info-icon {
+                width: 60px;
+                height: 60px;
+                padding: 15px;
+            }
+
+            .contact-form {
+                padding: 3rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 1rem 1.5rem;
+            }
+
+            .contact-form .form-group textarea {
+                min-height: 120px;
+            }
+
+            footer {
+                padding: 4rem 3rem 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 4rem;
+            }
+
+            .floating-form {
+                bottom: 30px;
+                right: 30px;
+            }
+
+            .floating-form-trigger {
+                width: 70px;
+                height: 70px;
+                padding: 18px;
+            }
+
+            .floating-form-panel {
+                bottom: 90px;
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo gradient-text-primary">AquaFlow Pro</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">How We Work</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:+447700123456" class="nav-cta-desktop">📞 +44 7700 123456</a></li>
+            </ul>
+            <a href="tel:+447700123456" class="nav-cta-mobile">📞 +44 7700 123456</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Premium Plumbing Excellence</div>
+            <h1 class="hero-title gradient-text-primary">
+                Expert Solutions
+                <span class="accent gradient-text-accent">Built to Last</span>
+            </h1>
+            <p class="hero-description">
+                From emergency repairs to complete system installations, we deliver professional plumbing services with meticulous attention to detail and unwavering commitment to quality.
+            </p>
+            <div class="hero-buttons">
+                <a href="tel:+447700123456" class="btn btn-primary">Call +44 7700 123456</a>
+                <a href="#contact" class="btn btn-secondary">Schedule Service</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number gradient-text-teal">15K+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number gradient-text-teal">98%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number gradient-text-teal">20yr</div>
+                    <div class="stat-label">Industry Experience</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-form-wrapper">
+                <div class="hero-form">
+                    <h3 class="gradient-text-primary">Get Free Quote</h3>
+                    <p>Tell us about your plumbing needs and receive a detailed estimate within 2 hours.</p>
+                    <form id="heroForm">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" required placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Needed</label>
+                            <select>
+                                <option>Select a service...</option>
+                                <option>Emergency Repair</option>
+                                <option>Pipe Installation</option>
+                                <option>Drain Cleaning</option>
+                                <option>Water Heater</option>
+                                <option>General Service</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Brief Description</label>
+                            <textarea placeholder="Describe your plumbing issue..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Request Free Quote</button>
+                        <p class="form-note">🔒 Your information is secure and confidential</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-tag gradient-text-accent">What We Offer</div>
+            <h2 class="section-title gradient-text-primary">Comprehensive Plumbing Services</h2>
+            <p class="section-description">
+                Every service is delivered with precision, backed by years of expertise and cutting-edge techniques.
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="30" fill="#FFE5DD" opacity="0.3"/>
+                        <path d="M32 12L32 52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M20 24L32 12L44 24" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="32" cy="32" r="8" fill="currentColor" opacity="0.2"/>
+                        <path d="M32 26C34.7614 26 37 28.2386 37 31C37 33.7614 34.7614 36 32 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M27 31C27 28.2386 29.2386 26 32 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M18 40L22 36M46 40L42 36M32 48L32 44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="32" cy="32" r="3" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="service-number">01</div>
+                <h3 class="service-title">Emergency Plumbing</h3>
+                <p class="service-description">
+                    Rapid response for urgent plumbing issues. Available 24/7 to prevent water damage and restore function.
+                </p>
+                <ul class="service-list">
+                    <li>Burst pipe repair</li>
+                    <li>Severe leak detection</li>
+                    <li>System restoration</li>
+                    <li>Damage prevention</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="30" fill="#E6F2FF" opacity="0.3"/>
+                        <rect x="14" y="26" width="36" height="12" rx="2" fill="currentColor" opacity="0.15"/>
+                        <path d="M16 28H48M16 36H48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="20" cy="32" r="3" stroke="currentColor" stroke-width="2" fill="white"/>
+                        <circle cx="32" cy="32" r="3" stroke="currentColor" stroke-width="2" fill="white"/>
+                        <circle cx="44" cy="32" r="3" stroke="currentColor" stroke-width="2" fill="white"/>
+                        <path d="M50 28V36C50 37.1046 50.8954 38 52 38H56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M8 28H12C13.1046 28 14 28.8954 14 30V34C14 35.1046 13.1046 36 12 36H8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M28 20V26M36 20V26M28 38V44M36 38V44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="service-number">02</div>
+                <h3 class="service-title">Pipe Installation</h3>
+                <p class="service-description">
+                    Modern piping solutions using durable materials designed for longevity and optimal performance.
+                </p>
+                <ul class="service-list">
+                    <li>Whole-home repiping</li>
+                    <li>Commercial installations</li>
+                    <li>Gas line services</li>
+                    <li>PEX & copper systems</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="30" fill="#ECEBFE" opacity="0.3"/>
+                        <circle cx="32" cy="32" r="16" stroke="currentColor" stroke-width="2.5" fill="white"/>
+                        <path d="M32 16V48" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+                        <path d="M16 32H48" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+                        <circle cx="32" cy="32" r="4" fill="currentColor"/>
+                        <path d="M32 38C35.3137 38 38 35.3137 38 32C38 28.6863 35.3137 26 32 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M32 26C28.6863 26 26 28.6863 26 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 3"/>
+                        <path d="M42 20L44 18M44 46L42 44M20 44L18 46M18 18L20 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M28 12L32 8L36 12M36 52L32 56L28 52M52 28L56 32L52 36M12 36L8 32L12 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="service-number">03</div>
+                <h3 class="service-title">Drain Solutions</h3>
+                <p class="service-description">
+                    Advanced diagnostic tools and cleaning methods to clear blockages and maintain flow.
+                </p>
+                <ul class="service-list">
+                    <li>Hydro jetting</li>
+                    <li>Camera inspections</li>
+                    <li>Root removal</li>
+                    <li>Preventive maintenance</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="30" fill="#E0FFFA" opacity="0.3"/>
+                        <rect x="20" y="14" width="24" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="white"/>
+                        <path d="M24 20H40M24 26H40M24 32H40" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+                        <circle cx="32" cy="40" r="5" fill="currentColor" opacity="0.2"/>
+                        <path d="M28 38C28 35.7909 29.7909 34 32 34C34.2091 34 36 35.7909 36 38" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M30 40C30 38.8954 30.8954 38 32 38C33.1046 38 34 38.8954 34 40C34 41.1046 33.1046 42 32 42C30.8954 42 30 41.1046 30 40Z" fill="currentColor"/>
+                        <path d="M28 42V44C28 45.1046 28.8954 46 30 46H34C35.1046 46 36 45.1046 36 44V42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="26" y="10" width="12" height="4" rx="1" fill="currentColor" opacity="0.3"/>
+                        <path d="M29 8V10M35 8V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="service-number">04</div>
+                <h3 class="service-title">Water Heaters</h3>
+                <p class="service-description">
+                    Installation and repair of traditional, tankless, and hybrid water heating systems.
+                </p>
+                <ul class="service-list">
+                    <li>Tankless systems</li>
+                    <li>Tank replacements</li>
+                    <li>Efficiency upgrades</li>
+                    <li>Annual maintenance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-small">
+        <div class="cta-small-content">
+            <h3>EMERGENCY PLUMBING</h3>
+            <p>Available 24/7 for emergencies and scheduled appointments</p>
+            <div class="cta-small-buttons">
+                <a href="tel:+447700123456" class="btn btn-primary">📞 Call +44 7700 123456</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-banner">
+        <div class="trust-content">
+            <div class="trust-text">
+                <h2>Licensed, Certified & Fully Insured</h2>
+                <p>
+                    Our team brings decades of combined experience, advanced certifications, and a commitment to excellence that sets industry standards. Every technician is background-checked and continuously trained on the latest techniques.
+                </p>
+            </div>
+            <div class="trust-badges">
+                <div class="badge">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="badge-title">Master Licensed</div>
+                    <div class="badge-text">State certified professionals</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="badge-title">Fully Insured</div>
+                    <div class="badge-text">$2M liability coverage</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="badge-title">Fast Response</div>
+                    <div class="badge-text">Same-day service</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="badge-title">Guaranteed Work</div>
+                    <div class="badge-text">Lifetime warranty</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CTA SECTION - MATCHING EMERGENCY PLUMBING FORMAT -->
+    <section class="cta">
+        <div class="cta-content">
+            <h3>NEED PLUMBING SERVICE?</h3>
+            <p>Available 24/7 for emergencies and scheduled appointments</p>
+            <div class="cta-buttons">
+                <a href="tel:+447700123456" class="btn btn-primary">📞 Call +44 7700 123456</a>
+                <a href="#contact" class="btn btn-secondary">Request Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="process" id="process">
+        <div class="section-header">
+            <div class="section-tag gradient-text-success">Simple & Transparent</div>
+            <h2 class="section-title gradient-text-white">Our Service Process</h2>
+            <p class="section-description">
+                A streamlined approach that prioritizes your time, budget, and peace of mind.
+            </p>
+        </div>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Contact</h3>
+                <p class="step-description">Call or book online. We'll confirm your appointment and provide an estimated arrival window.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Inspect</h3>
+                <p class="step-description">Our technician conducts a thorough assessment using professional diagnostic equipment.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Quote</h3>
+                <p class="step-description">Receive transparent, upfront pricing with no hidden fees. You approve before we proceed.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Complete</h3>
+                <p class="step-description">Expert work completed to code, cleaned up, and backed by our satisfaction guarantee.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+        <div class="section-header">
+            <div class="section-tag gradient-text-accent">Client Experiences</div>
+            <h2 class="section-title gradient-text-primary">What Our Customers Say</h2>
+            <p class="section-description">
+                Real feedback from homeowners and businesses who trust us with their plumbing needs.
+            </p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "Had a major leak at 3 AM. AquaFlow Pro answered immediately and had someone at my door within 45 minutes. Professional, efficient, and saved us from serious water damage."
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/6987e9a22dd9855b24dbd2cb.png" alt="Michael Kim" class="author-avatar-img">
+                    <div class="author-info">
+                        <h4>Michael Kim</h4>
+                        <p>Homeowner, Portland</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial featured">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "We needed to repipe our entire office building. AquaFlow coordinated everything perfectly, worked around our schedule, and completed the job ahead of timeline. The quality is exceptional."
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/6987eb1f5f93998e3de7e054.png" alt="Lisa Rodriguez" class="author-avatar-img">
+                    <div class="author-info">
+                        <h4>Lisa Rodriguez</h4>
+                        <p>Property Manager, Seattle</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "After three other plumbers couldn't solve our recurring drain issue, AquaFlow used camera technology to find the problem 40 feet underground. Fixed permanently with trenchless repair. Impressive."
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://storage.googleapis.com/msgsndr/NfLLX9XgIk2SkPvf5nmp/media/6987e9a20708e4034b76038a.png" alt="James Williams" class="author-avatar-img">
+                    <div class="author-info">
+                        <h4>James Williams</h4>
+                        <p>Homeowner, Vancouver</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3 class="gradient-text-white">Get in Touch</h3>
+                <div class="info-items">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59524 1.99522 8.06572 2.16708 8.43369 2.48353C8.80166 2.79999 9.04201 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5864 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="info-details">
+                            <h4>Phone</h4>
+                            <p>+44 7700 123456<br>Available 24/7 for emergencies</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="info-details">
+                            <h4>Email</h4>
+                            <p>info@aquaflowpro.com<br>Response within 2 hours</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="info-details">
+                            <h4>Service Area</h4>
+                            <p>Greater Portland Metro<br>Licensed in OR, WA</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="info-details">
+                            <h4>Hours</h4>
+                            <p>Mon-Sat: 7AM - 7PM<br>Emergency: 24/7/365</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Type</label>
+                        <select>
+                            <option>Emergency Repair</option>
+                            <option>Pipe Installation</option>
+                            <option>Drain Cleaning</option>
+                            <option>Water Heater</option>
+                            <option>General Service</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3 class="gradient-text-white">AquaFlow Pro</h3>
+                <p>Professional plumbing services for residential and commercial properties. Licensed, insured, and committed to excellence in every project.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Emergency Plumbing</a></li>
+                    <li><a href="#services">Pipe Installation</a></li>
+                    <li><a href="#services">Drain Solutions</a></li>
+                    <li><a href="#services">Water Heaters</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Service Areas</a></li>
+                    <li><a href="#">Licensing</a></li>
+                    <li><a href="#">Financing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Warranties</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AquaFlow Pro. All rights reserved. Licensed Plumber #PL-98765</p>
+        </div>
+    </footer>
+
+    <div class="floating-form">
+        <button class="floating-form-trigger" id="floatingFormBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="floating-form-panel" id="floatingFormPanel">
+            <button class="close-floating-form" id="closeFloatingForm">×</button>
+            <h4 class="gradient-text-primary">Quick Contact</h4>
+            <p>Need immediate assistance? Fill out this quick form.</p>
+            <form id="quickForm">
+                <input type="text" placeholder="Your Name *" required>
+                <input type="tel" placeholder="Phone Number *" required>
+                <select required>
+                    <option value="">Service Type *</option>
+                    <option>Emergency Repair</option>
+                    <option>Scheduled Service</option>
+                    <option>Quote Request</option>
+                    <option>General Inquiry</option>
+                </select>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        document.getElementById('heroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request! We will contact you within 2 hours with a detailed quote.');
+            this.reset();
+        });
+
+        document.querySelector('#contact form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for contacting us! We will respond within 30 minutes.');
+            this.reset();
+        });
+
+        const floatingForm = document.querySelector('.floating-form');
+        const floatingFormBtn = document.getElementById('floatingFormBtn');
+        const floatingFormPanel = document.getElementById('floatingFormPanel');
+        const closeFloatingForm = document.getElementById('closeFloatingForm');
+        const quickForm = document.getElementById('quickForm');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                floatingForm.classList.add('visible');
+            } else {
+                floatingForm.classList.remove('visible');
+                floatingFormPanel.classList.remove('active');
+            }
+        });
+
+        floatingFormBtn.addEventListener('click', () => {
+            floatingFormPanel.classList.toggle('active');
+        });
+
+        closeFloatingForm.addEventListener('click', () => {
+            floatingFormPanel.classList.remove('active');
+        });
+
+        quickForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you shortly.');
+            this.reset();
+            floatingFormPanel.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
